@@ -2,3 +2,4 @@
 sql_app.db
 venv
 **/__pycache__/**
+settings.json
