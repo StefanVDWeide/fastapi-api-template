@@ -1,0 +1,4 @@
+.env
+sql_app.db
+venv
+**/__pycache__/**
