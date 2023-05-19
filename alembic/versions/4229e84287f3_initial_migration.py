@@ -1,8 +1,8 @@
 """initial migration
 
-Revision ID: 013ba6293e67
+Revision ID: 4229e84287f3
 Revises: 
-Create Date: 2023-05-16 20:06:55.978774
+Create Date: 2023-05-19 21:53:40.656625
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '013ba6293e67'
+revision = '4229e84287f3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,14 +22,19 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.Text(), nullable=False),
     sa.Column('last_name', sa.Text(), nullable=False),
+    sa.Column('email', sa.Text(), nullable=False),
+    sa.Column('hashed_password', sa.Text(), nullable=False),
     sa.Column('creation_date', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email')
     )
     op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.Text(), nullable=False),
+    sa.Column('content', sa.Text(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('date', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('creation_date', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

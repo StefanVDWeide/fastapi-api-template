@@ -12,6 +12,7 @@ from asyncio import current_task
 
 
 SQLALCHEMY_DATABASE_URL = getenv("DATABASE_URL", "sqlite+aiosqlite:///sql_app.db")
+
 async_engine = create_async_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
@@ -20,7 +21,11 @@ async_engine = create_async_engine(
 async def create_async_session() -> async_scoped_session[AsyncSession]:
     async_session = async_scoped_session(
         async_sessionmaker(
-            autocommit=False, autoflush=False, class_=AsyncSession, bind=async_engine
+            autocommit=False,
+            autoflush=False,
+            class_=AsyncSession,
+            bind=async_engine,
+            expire_on_commit=False,
         ),
         scopefunc=current_task,
     )
