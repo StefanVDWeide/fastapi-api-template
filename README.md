@@ -7,6 +7,7 @@ and leaves all related decisions up to the developer.
 
 * Minimal Fastapi app
 * Async/Await Functionallity
+* JWT based OAuth security on a per endpoint basis
 * Unit tests
 * Type hints
 * Basic Database Functionality Included (SQLite3)
