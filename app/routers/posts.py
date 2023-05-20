@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import select, delete
 from app.db import sessions
 from app.db.models import Posts, Users
 from app.db.schemas import posts as posts_schema
@@ -58,5 +58,24 @@ async def add_user(
 
 # TODO: Implement post deleting functionality only for the user who created the post
 @router.delete("/delete/post/{id}")
-async def delete_user(current_user: auth_user_dependency, id: int) -> str:
+async def delete_user(
+    current_user: auth_user_dependency,
+    id: int,
+    db: AsyncSession = Depends(sessions.get_async_session),
+) -> str:
+    q = await db.scalars(select(Posts).filter(Posts.id == id))
+    post = q.first()
+
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+
+    if post.id != current_user.id:  # type: ignore
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unable to delete other user's their posts",
+        )
+
+    q = delete(Posts).filter(Posts.id == id)
+    await db.execute(q)
+    await db.commit()
     return "ok"
