@@ -66,6 +66,9 @@ First, we need to initialize the database. Make sure you have a `.env` file in t
 
 ```env
 DATABASE_URL = sqlite+aiosqlite:///sql_app.db
+DATABASE_TEST_URL = sqlite+aiosqlite:///test.db
+JWT_SECRET_KEY = secret
+JWT_REFRESH_SECRET_KEY = secret
 ```
 
 Now that the app knows we want to use a SQLite database, run the following command to create it:

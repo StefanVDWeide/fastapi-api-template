@@ -17,7 +17,7 @@ from app.db.sessions import Base, get_async_session
 
 
 SQLALCHEMY_TEST_DATABASE_URL = getenv(
-    "DATABASE_URL", "sqlite+aiosqlite:///async_test.db"
+    "DATABASE_TEST_URL", "sqlite+aiosqlite:///async_test.db"
 )
 
 async_engine = create_async_engine(
