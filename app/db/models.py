@@ -13,6 +13,7 @@ class Users(Base):
     email = sa.Column(sa.Text, nullable=False, unique=True)
     hashed_password = sa.Column(sa.Text, nullable=False)
     creation_date = sa.Column(sa.DateTime, server_default=sa.func.now(), nullable=False)  # type: ignore
+    is_admin = sa.Column(sa.Boolean, nullable=False, default=False)
 
     posts = relationship(
         "Posts", back_populates="user", lazy="selectin", cascade="all, delete"

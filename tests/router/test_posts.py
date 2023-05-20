@@ -9,6 +9,7 @@ async def test_get_posts(async_client: AsyncClient) -> None:
         "last_name": "string",
         "email": "user@example.com",
         "password": "string",
+        "is_admin": True,
     }
     await async_client.post("/auth/register", json=payload_register)
 
@@ -31,6 +32,7 @@ async def test_get_post(async_client: AsyncClient) -> None:
         "last_name": "string",
         "email": "user@example.com",
         "password": "string",
+        "is_admin": True,
     }
     await async_client.post("/auth/register", json=payload_register)
 
@@ -53,6 +55,7 @@ async def test_add_post(async_client: AsyncClient) -> None:
         "last_name": "string",
         "email": "user@example.com",
         "password": "string",
+        "is_admin": True,
     }
     await async_client.post("/auth/register", json=payload_register)
 
@@ -77,6 +80,7 @@ async def test_delete_post(async_client: AsyncClient) -> None:
         "last_name": "string",
         "email": "user@example.com",
         "password": "string",
+        "is_admin": True,
     }
     await async_client.post("/auth/register", json=payload_register)
 

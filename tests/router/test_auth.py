@@ -9,6 +9,7 @@ async def test_register(async_client: AsyncClient) -> None:
         "last_name": "string",
         "email": "user@example.com",
         "password": "string",
+        "is_admin": True,
     }
     rv = await async_client.post("/auth/register", json=payload)
     assert rv.status_code == 200
@@ -21,6 +22,7 @@ async def test_login(async_client: AsyncClient) -> None:
         "last_name": "string",
         "email": "user@example.com",
         "password": "string",
+        "is_admin": True,
     }
     await async_client.post("/auth/register", json=payload_register)
 

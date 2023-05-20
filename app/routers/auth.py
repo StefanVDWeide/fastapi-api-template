@@ -37,6 +37,7 @@ async def register_user(
         first_name=payload.first_name,
         last_name=payload.last_name,
         email=payload.email,
+        is_admin=payload.is_admin,
         hashed_password=get_password_hash(payload.password),
     )
     db.add(user)

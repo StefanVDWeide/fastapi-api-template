@@ -7,6 +7,7 @@ class UsersBase(BaseModel):
     first_name: constr(to_lower=True)  # type: ignore
     last_name: constr(to_lower=True)  # type: ignore
     email: EmailStr
+    is_admin: bool
 
     class Config:
         orm_mode = True
