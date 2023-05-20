@@ -6,7 +6,7 @@ and leaves all related decisions up to the developer.
 ## Features
 
 * Minimal Fastapi app
-* Async/Await Functionallity
+* Async/Await Functionality
 * JWT based OAuth security on a per endpoint basis
 * Unit tests
 * Type hints
